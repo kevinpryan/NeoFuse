@@ -243,7 +243,10 @@ do
 		--outReadsUnmapped Fastx \
 		--outStd BAM_Unsorted \
 		--outBAMcompression 0 \
-		--outSAMtype BAM Unsorted 2>$LOGSDIR$FILE.STAR.err | samtools sort -@ $SAMTOOLSTHREADS -O BAM -o ${OUTDIRALIGN}${FILE}.Aligned.sortedByCoord.out.bam /dev/stdin > $LOGSDIR$FILE.samtools.log 2>$LOGSDIR$FILE.samtools.err &
+		--outSAMtype BAM Unsorted 2>$LOGSDIR$FILE.STAR.err |
+			samtools sort -@ $SAMTOOLSTHREADS -O BAM -o ${OUTDIRALIGN}${FILE}.Aligned.sortedByCoord.out.bam /dev/stdin \
+			> $LOGSDIR$FILE.samtools.log 2>$LOGSDIR$FILE.samtools.err &
+		
 
 		# Arriba
 		echo " Arriba Run started" | sed "s/^/[`date +"%T"`] /"
@@ -581,4 +584,4 @@ do
 done
 
 rm $OUTDIR"/in.tsv"
-#rm $IN
+rm $IN
