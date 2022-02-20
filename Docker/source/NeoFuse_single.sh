@@ -454,12 +454,12 @@ if [ "$NETMHCPAN" == "false" ]; then
 		fi
 	done
 	wait
-	sleep 30 # Extra time to release resources
+	sleep 120 # Extra time to release resources, changed this from 30 to 120 as build_temp.py was failing - input files not yet created it seems
 	echo " Creating Final Ouptut" | sed "s/^/[`date +"%T"`] /"
 	for j in $PEPLEN; do
 		python3 /usr/local/bin/source/build_temp.py -a $FINALTMP*$j"_ASSOCIATIONS_OUT.txt" -o $FINALTMP$FILE"_"$j > $LOGSDIR$FILE.final.log 2>&1
 		if [ `echo $?` != 0 ]; then
-			echo "An error occured while creating the final output files, check $REALOUT/$FILE/LOGS/$FILE.final.log for more details"
+			echo "An error occured while creating the final output files, check $REALOUT/$FILE/LOGS/$FILE.final.log for more details, looks like error was with using build_temp.py"
 			exit 1
 		else
 			:
@@ -506,7 +506,7 @@ else
 	for j in $PEPLEN; do
 		python3 /usr/local/bin/source/build_temp_netMHCpan.py -a $FINALTMP*$j"_ASSOCIATIONS_OUT.txt" -o $FINALTMP$FILE"_"$j > $LOGSDIR$FILE.final.log 2>&1
 		if [ `echo $?` != 0 ]; then
-			echo "An error occured while creating the final output files, check $REALOUT/$FILE/LOGS/$FILE.final.log for more details"
+			echo "An error occured while creating the final output files, check $REALOUT/$FILE/LOGS/$FILE.final.log for more details, looks like error occured when using build_temp_netMHCpan.py"
 			exit 1
 		else
 			:
