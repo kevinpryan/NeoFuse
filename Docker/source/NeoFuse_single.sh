@@ -514,7 +514,9 @@ else
 	done
 fi
 
-echo "Fusion	Gene1	Gene2	Breakpoint1	Breakpoint2	HLA_type	Fusion_Peptide	IC50	Rank	Event_Type	Stop_Codon	Confidence" > $FINALOUTDIR$FILE"_unfiltered.tsv"
+#echo -e'\t'Fusion'\t'Gene1'\t'Gene2'\t'Breakpoint1'\t'Breakpoint2'\t'Split_Reads1'\t'Split_Reads2''HLA_type	Fusion_Peptide	IC50	Rank	Event_Type	Stop_Codon	Confidence" > $FINALOUTDIR$FILE"_unfiltered.tsv"
+echo -e Fusion'\t'Gene1'\t'Gene2'\t'Breakpoint1'\t'Breakpoint2'\t'Split_Reads1'\t'Split_Reads2'\t'Discordant_Reads'\t'Closest_Breakpoint1'\t'Closest_Breakpoint2'\t'HLA_Type'\t'Fusion_Peptide'\t'IC50'\t'Rank'\t'Event_Type'\t'Stop_Codon'\t'Confidence > $FINALOUTDIR$FILE"_unfiltered.tsv"
+
 for file in $FINALTMP$FILE*_final.tsv; do
 	cat $file | sed 1d >> $FINALOUTDIR$FILE"_unfiltered.tsv"
 done
